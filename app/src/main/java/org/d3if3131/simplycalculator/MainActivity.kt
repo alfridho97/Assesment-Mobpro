@@ -2,14 +2,15 @@ package org.d3if3131.simplycalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-
+import android.widget.*
+import org.d3if3131.simplycalculator.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var EditBilangan1: EditText
     private lateinit var EditBilangan2: EditText
     private lateinit var ViewHasil: TextView
@@ -17,7 +18,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         EditBilangan1 = findViewById(R.id.edit_bilangan_pertama)
         EditBilangan2 = findViewById(R.id.edit_bilangan_kedua)
@@ -36,6 +38,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        val bilanganPertama = binding.editBilanganPertama.text.toString()
+        if (TextUtils.isEmpty(bilanganPertama)) {
+            Toast.makeText(this, R.string.bilangan_pertama_invalid, Toast.LENGTH_LONG).show()
+            return
+        }
+        val bilanganKedua = binding.editBilanganKedua.text.toString()
+        if (TextUtils.isEmpty(bilanganKedua)) {
+            Toast.makeText(this, R.string.bilangan_kedua_invalid, Toast.LENGTH_LONG).show()
+            return
+        }
         if (v != null) {
             when (v.id) {
                 R.id.buttonTambah -> {
@@ -50,15 +62,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
                 R.id.buttonKali -> {
                     val HasilKali = EditBilangan1.text.toString().trim()
-                        .toDouble() + EditBilangan2.text.toString().toDouble()
+                        .toDouble() * EditBilangan2.text.toString().toDouble()
                     ViewHasil.text = HasilKali.toString()
                 }
                 R.id.buttonBagi -> {
                     val HasilBagi = EditBilangan1.text.toString().trim()
-                        .toDouble() + EditBilangan2.text.toString().toDouble()
+                        .toDouble() / EditBilangan2.text.toString().toDouble()
                     ViewHasil.text = HasilBagi.toString()
                 }
             }
         }
     }
 }
+
