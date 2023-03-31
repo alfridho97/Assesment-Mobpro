@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/BackgroundKalkulator"
+    android:background="@drawable/backgroundkalkulator"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -50,8 +50,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
         <Button
@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="@string/hasil"
         android:textSize="10pt"
-        android:textStyle="bold"
-        android:text="@string/hasil"/>
+        android:textStyle="bold" />
 </LinearLayout>
